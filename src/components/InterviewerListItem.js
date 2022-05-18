@@ -1,13 +1,15 @@
-import React from 'react'
-export default function InterviewerListItem() {
+import React from "react"
+import "components/InterviewerListItem.scss"
+export default function InterviewerListItem(props) {
+  const {id,name,avatar,setInterviewer} =props
   return (
-    <li className="interviewers__item">
+    <li className="interviewers__item" onClick={()=>{setInterviewer(id)}}>
       <img
         className="interviewers__item-image"
-        src="https://i.imgur.com/LpaY82x.png"
-        alt="Sylvia Palmer"
+        src={avatar}
+        alt={name}
       />
-      Sylvia Palmer
+      {name}
     </li>
   )
 
