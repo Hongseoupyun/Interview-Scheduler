@@ -24,15 +24,15 @@ storiesOf("Button", module)
     </Button>
   ));
 import DayListItem from "components/DayListItem";
- storiesOf("DayListItem", module) 
+storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  }) 
-  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) 
-  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
+  })
+  .add("Unselected", () => <DayListItem name="Monday" spots={5} />)
+  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />)
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
 
 
@@ -61,53 +61,50 @@ storiesOf("DayList", module)
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
   })
   .add("Monday", () => (
-    <DayList days={days} day={"Monday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Monday"} onChange={action("setDay")} />
   ))
   .add("Tuesday", () => (
-    <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Tuesday"} onChange={action("setDay")} />
   ))
   .add("Wednesday", () => (
-      <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
   ));
 
 
-  
-  import InterviewerListItem from "components/InterviewerListItem";
-  const interviewer = {
-    id: 1,
-    name: "Sylvia Palmer",
-    avatar: "https://i.imgur.com/LpaY82x.png"
-  };
-  
-  storiesOf("InterviewerListItem", module)
-    .addParameters({
-      backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-    })
-    .add("Unselected", () => (
-      <InterviewerListItem
-        id={interviewer.id}
-        name={interviewer.name}
-        avatar={interviewer.avatar}
-      />
-    ))
-    .add("Selected", () => (
-      <InterviewerListItem
-        id={interviewer.id}
-        name={interviewer.name}
-        avatar={interviewer.avatar}
-        selected
-      />
-    ))
-    .add("Clickable", () => (
-      <InterviewerListItem
-        id={interviewer.id}
-        name={interviewer.name}
-        avatar={interviewer.avatar}
-        setInterviewer={action("setInterviewer")}
-      />
-    ));
 
+import InterviewerListItem from "components/InterviewerListItem";
+const interviewer = {
+  id: 1,
+  name: "Sylvia Palmer",
+  avatar: "https://i.imgur.com/LpaY82x.png"
+};
 
+storiesOf("InterviewerListItem", module)
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+  })
+  .add("Unselected", () => (
+    <InterviewerListItem
+      id={interviewer.id}
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+    />
+  ))
+  .add("Selected", () => (
+    <InterviewerListItem
+      id={interviewer.id}
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+      selected
+    />
+  ))
+  .add("Clickable", () => (
+    <InterviewerListItem
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+      setInterviewer={() => action("setInterviewer")(interviewer.id)}
+    />
+  ));
 
 
 
@@ -132,12 +129,24 @@ storiesOf("InterviewerList", module)
   .add("Selected", () => (
     <InterviewerList
       interviewers={interviewers}
-      interviewer={3}
+      value={3}
     />
   ))
   .add("Clickable", () => (
     <InterviewerList
       interviewers={interviewers}
-      setInterviewer={action("setInterviewer")}
+      onChange={action("setInterviewer")}
     />
   ));
+
+
+
+
+
+import Appointment from "components/Appointments/index.js";
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />);

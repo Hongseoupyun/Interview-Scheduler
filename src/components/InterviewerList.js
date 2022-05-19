@@ -4,7 +4,7 @@ import InterviewerListItem from "./InterviewerListItem";
 
 
 export default function InterviewerList(props) {
-  const { interviewers, setInterviewer, interviewer } = props;
+  const { interviewers, onChange, value } = props;
 
   const interviewerListItem = interviewers.map((eachInterviewer)=>{
     return (
@@ -12,8 +12,8 @@ export default function InterviewerList(props) {
       key ={eachInterviewer.id}
       name ={eachInterviewer.name} 
       avatar={eachInterviewer.avatar}
-      selected={eachInterviewer.id===interviewer}
-      setInterviewer={()=>{setInterviewer(eachInterviewer.id)}} />
+      selected={eachInterviewer.id===value}
+      setInterviewer={()=>{onChange(eachInterviewer.id)}} />
     )
   })
 
