@@ -1,10 +1,11 @@
-
 import React, { useState, useEffect } from "react";
-import { Fragment } from "react"
-import axios from "axios"
+import { Fragment } from "react";
+import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointments";
+import { getAppointmentsForDay } from "helpers/selectors";
+import getInterview from "helpers/selectors";
 
 // const appointments = {
 //   "1": {
@@ -49,45 +50,50 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewrs:{}
   });
-  const daliyAppointments =[];
-  const setDay = day => setState({ ...state, day });
-
+  const setDay = (day) => setState({ ...state, day });
   
-  // const setDays = (days)=>{
-  //   setState(prev => ({ ...prev, days }));
-  // }
+  
+  const daliyAppointments = getAppointmentsForDay(state, state.day);
+  console.log("dailyAppointments==>",daliyAppointments)
+ 
 
-  const eachAppointment = daliyAppointments.map((appointment)=>{
-    return (
-    <Appointment
-    key = {appointment.id}
-    {...appointment} 
-    />
-      )
-      
-  }) 
-
-  useEffect(()=>{
-    const daysURL = "http://localhost:8001/api/days"
-    const appointmentsURL = "http://localhost:8001/api/appointments"
+  const eachAppointment = daliyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    return <Appointment
+    key={appointment.id}
+    id={appointment.id}
+    time={appointment.time}
+    interview={interview}
+  />;
+  });
+  
+  
+  useEffect(() => {
+    const daysURL = "http://localhost:8001/api/days";
+    const appointmentsURL = "http://localhost:8001/api/appointments";
+    const interviewersURL = "http://localhost:8001/api/interviewers";
     Promise.all([
-      axios.get(daysURL),
-      axios.get(appointmentsURL)
-    ]).then((all)=>{
-      console.log(all[0].data)
-      console.log(all[1].data)
-      setState(prev => ({ ...prev, days:all[0].data, appointments:all[1].data}));
-    })
-
-    // axios.get(daysURL)
-    // .then((res)=>{
-    //   // setDays([...res.data])
-    //   console.log(res.data)
-    // })
-
-  },[])
+      axios.get(daysURL), 
+      axios.get(appointmentsURL),
+      axios.get(interviewersURL)
+    ])
+    .then(
+      (all) => {
+        console.log("days->",all[0].data);
+        console.log("appointments-->",all[1].data);
+        console.log("interviewers-->",all[2].data)
+        setState((prev) => ({
+          ...prev,
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewrs:all[2].data
+        }));
+      }
+    );
+  }, []);
 
   return (
     <main className="layout">
@@ -99,11 +105,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            days={state.days}
-            value={state.day}
-            onChange={setDay}
-          />
+          <DayList days={state.days} value={state.day} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -113,8 +115,8 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         <Fragment>
-        {eachAppointment}
-        <Appointment key="last" time="5pm" />
+          {eachAppointment}
+          <Appointment key="last" time="5pm" />
         </Fragment>
       </section>
     </main>
