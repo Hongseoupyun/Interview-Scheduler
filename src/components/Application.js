@@ -16,9 +16,9 @@ export default function Application(props) {
     interviewers:{}
   });
   
+  console.log(state.interviewers)
   const setDay = (day) => setState({ ...state, day });
   const daliyAppointments = getAppointmentsForDay(state, state.day);
-  console.log(daliyAppointments)
   const eachAppointment = daliyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     
