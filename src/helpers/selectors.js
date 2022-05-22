@@ -11,11 +11,11 @@ export function getAppointmentsForDay(state, day) {
   const result = findDay.appointments.map(e => {
     return appointments[e]
   })
-
   return result
 }
 
-export default function getInterview(state, interview) {
+export function getInterview(state, interview) {
 
   return !interview? null: {...interview, interviewer:state.interviewers[interview.interviewer]}
+  
 }

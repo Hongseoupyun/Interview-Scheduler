@@ -11,11 +11,13 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   
   const reset = function () {
-    return  setStudent(""),  setInterviewer(null)
+    setStudent("")
+    setInterviewer(null)
   }
 
   const cancel = function(){
-    return reset() ,onCancel
+    reset() 
+    onCancel()
   }
 
 
