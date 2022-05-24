@@ -30,31 +30,32 @@ export default function Application(props) {
 
     return axios
       .put(`/api/appointments/${id}`, { interview })
-      .then(setState({ ...state, appointments: appointments }))
-      .catch((error) => {
-        console.log("ERROR_SAVE=>", error);
-      });
+      .then(()=>setState({ ...state, appointments: appointments }))
+      // .catch((error) => {
+      //   console.log("ERROR_SAVE=>", error);
+      // });
   }
 
-  function cancelInterview(id, interview) {
+  function cancelInterview(id) {
 
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview },
+      interview: null
     };
     const appointments = {
       ...state.appointments,
       [id]:appointment
     }
 
-    console.log(id, interview);
+    console.log(id);
     
     return axios
-      .delete(`/api/appointments/${id}`, { interview })
-      .then(setState({ ...state, appointments: appointments }))
-      .catch((error) => {
-        console.log("ERROR_DELETE=>", error);
-      });
+      .delete(`/api/appointments/${id}`)
+      .then(()=>setState({ ...state, appointments: appointments }))
+      // .catch((error) => {
+        
+      //   console.log("ERROR_DELETE=>", error);
+      // });
 
   }
 

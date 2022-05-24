@@ -16,7 +16,7 @@ export default function useVisualMode(initial) {
       
     }
     if(!replace){
-       setHistory([...history, newMode])
+       setHistory(prev=>([...prev, newMode]))
     }
   }
 
@@ -35,7 +35,7 @@ export default function useVisualMode(initial) {
     mode,
     transition,
     back,
-    history
+    
 
   }
 }
