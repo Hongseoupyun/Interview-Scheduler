@@ -32,7 +32,7 @@ export default function Application(props) {
       .put(`/api/appointments/${id}`, { interview })
       .then(setState({ ...state, appointments: appointments }))
       .catch((error) => {
-        console.log("error=>", error);
+        console.log("ERROR_SAVE=>", error);
       });
   }
 
@@ -53,7 +53,7 @@ export default function Application(props) {
       .delete(`/api/appointments/${id}`, { interview })
       .then(setState({ ...state, appointments: appointments }))
       .catch((error) => {
-        console.log("error=>", error);
+        console.log("ERROR_DELETE=>", error);
       });
 
   }
