@@ -1,14 +1,35 @@
 # Interview Scheduler
 
+Interview Scheduler is a SPA(sigle page application) allows users to book, cancle and edit interviews.
+
+!["Main page "](https://github.com/Hongseoupyun/scheduler-Public-template/blob/master/docs/Main_page.png?raw=true)
+!["Booking1"](https://github.com/Hongseoupyun/scheduler-Public-template/blob/master/docs/Booking%20a%20Interview.png?raw=true)
+!["Booking2"](https://github.com/Hongseoupyun/scheduler-Public-template/blob/master/docs/Booking%20a%20interview2.png?raw=true)
+!["Confirm"](https://github.com/Hongseoupyun/scheduler-Public-template/blob/master/docs/Confirm.png?raw=true)
+!["Deleting status"](https://github.com/Hongseoupyun/scheduler-Public-template/blob/master/docs/Deleting%20status.png?raw=true)
+
+!["Saving Stauts"](https://github.com/Hongseoupyun/scheduler-Public-template/blob/master/docs/Saving%20status.png?raw=true)
+
+
 ## Setup
 
 Install dependencies with `npm install`.
+Set up the server using scheduler-api from [https://github.com/lighthouse-labs/scheduler-api]
+
+##Dependencies
+=>axios
+=>classnames
+=>normalize.css
+=>react
+=>react-dom
+=>react-scripts
 
 ## Running Webpack Development Server
 
 ```sh
 npm start
 ```
+
 ## Running Jest Test Framework
 
 ```sh
