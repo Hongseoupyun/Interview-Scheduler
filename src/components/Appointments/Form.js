@@ -5,19 +5,20 @@ import React, { useState } from 'react';
 
 export default function Form(props) {
 
-  const {  interviewers, onSave, onCancel } = props;
+  const { interviewers, onSave, onCancel } = props;
 
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-  
+
   const reset = function () {
     setStudent("")
     setInterviewer(null)
+    setError("")
   }
 
-  const cancel = function(){
-    reset() 
+  const cancel = function () {
+    reset()
     onCancel()
   }
   // const save = function (){
@@ -33,10 +34,10 @@ export default function Form(props) {
       setError("Please select an interviewer");
       return;
     }
-  
+    setError("")
     onSave(student, interviewer);
   }
-  
+
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -47,9 +48,9 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            onChange={(event)=> setStudent(event.target.value)}
+            onChange={(event) => setStudent(event.target.value)}
             value={student}
-            data-testid = "student-name-input"
+            data-testid="student-name-input"
           />
         </form>
         <section className="appointment__validation">{error}</section>
