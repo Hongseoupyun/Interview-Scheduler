@@ -16,7 +16,8 @@ Interview Scheduler is a SPA(sigle page application) allows users to book, cancl
 Install dependencies with `npm install`.
 Set up the server using scheduler-api from [https://github.com/lighthouse-labs/scheduler-api]
 
-##Dependencies
+## Dependencies
+
 =>axios
 =>classnames
 =>normalize.css
